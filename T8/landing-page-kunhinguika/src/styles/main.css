@@ -1,0 +1,399 @@
+/* ==========================================================================
+   MAIN STYLES
+   ========================================================================== */
+
+/* Importação dos Estilos Baseados em Camadas */
+@import 'base.css';
+@import 'components.css';
+@import 'layout.css';
+
+/* Estilos Específicos da Página */
+/* Ajustes Finais e Overrides */
+
+/* Ajustes de Responsividade Adicionais */
+@media (max-width: 768px) {
+    /* Garantir que todas as imagens sejam responsivas */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Melhorar espaçamento em dispositivos móveis */
+    section {
+        padding: var(--space-2xl) 0;
+    }
+    
+    /* Ajustar tamanhos de fonte para mobile */
+    h1 {
+        font-size: var(--font-size-3xl);
+    }
+    
+    h2 {
+        font-size: var(--font-size-2xl);
+    }
+    
+    h3 {
+        font-size: var(--font-size-xl);
+    }
+    
+    /* Melhorar a experiência de formulário em mobile */
+    input, textarea, select {
+        font-size: 16px; /* Prevenir zoom no iOS */
+    }
+}
+
+/* Ajustes para Impressão */
+@media print {
+    .header,
+    .hero-actions,
+    .footer,
+    .back-to-top,
+    .theme-toggle,
+    .hamburger {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: black;
+        background: white;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    a {
+        text-decoration: underline;
+        color: black;
+    }
+    
+    a[href^="http"]::after {
+        content: " (" attr(href) ")";
+    }
+}
+
+/* Ajustes para Tela Retina */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Imagens mais nítidas para telas retina */
+    img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Ajustes para Modo Alto Contraste */
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: black;
+        --text-secondary: #333;
+        --bg-primary: white;
+        --bg-secondary: #f0f0f0;
+        --primary-dark: #00008b;
+    }
+}
+
+/* Ajustes para Redução de Movimento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Estilos de Foco Acessíveis */
+:focus-visible {
+    outline: 3px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Melhorar visibilidade do placeholder */
+::placeholder {
+    color: var(--gray-400);
+    opacity: 1;
+}
+
+/* Suporte para Dark Mode do Sistema */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+        --text-primary: var(--gray-100);
+        --text-secondary: var(--gray-400);
+        --bg-primary: var(--primary-black);
+        --bg-secondary: var(--gray-900);
+        --bg-dark: var(--gray-800);
+        
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Utilitários para Espaçamento Responsivo */
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: var(--space-xs) !important; }
+.mt-2 { margin-top: var(--space-sm) !important; }
+.mt-3 { margin-top: var(--space-md) !important; }
+.mt-4 { margin-top: var(--space-lg) !important; }
+.mt-5 { margin-top: var(--space-xl) !important; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: var(--space-xs) !important; }
+.mb-2 { margin-bottom: var(--space-sm) !important; }
+.mb-3 { margin-bottom: var(--space-md) !important; }
+.mb-4 { margin-bottom: var(--space-lg) !important; }
+.mb-5 { margin-bottom: var(--space-xl) !important; }
+
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+
+/* Classes para Gradientes */
+.gradient-primary {
+    background: linear-gradient(135deg, var(--primary-dark), var(--accent-primary));
+}
+
+.gradient-dark {
+    background: linear-gradient(135deg, var(--primary-black), var(--gray-800));
+}
+
+/* Classes de Visibilidade */
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    display: block !important;
+}
+
+/* Loading States */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Estilos Específicos para Alertas */
+.alert {
+    padding: var(--space-md) var(--space-lg);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--space-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.alert-success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #16a34a;
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #dc2626;
+}
+
+.alert-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #d97706;
+}
+
+.alert-info {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: var(--accent-primary);
+}
+
+/* Estilos para Tooltips */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background: var(--gray-800);
+    color: white;
+    text-align: center;
+    padding: var(--space-sm);
+    border-radius: var(--border-radius-sm);
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    font-size: var(--font-size-sm);
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Estilos para Badges */
+.badge {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-primary {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--accent-primary);
+}
+
+.badge-secondary {
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.badge-success {
+    background: rgba(34, 197, 94, 0.1);
+    color: #16a34a;
+}
+
+/* Estilos para Separadores */
+.separator {
+    height: 1px;
+    background: var(--gray-200);
+    margin: var(--space-2xl) 0;
+}
+
+.separator-dashed {
+    border-top: 2px dashed var(--gray-300);
+}
+
+/* Estilos para Cards com Hover Especial */
+.card-hover-lift {
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card-hover-lift:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Estilos para Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    border-radius: inherit;
+}
+
+/* Estilos para Grids Flexíveis */
+.grid-auto-fit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-lg);
+}
+
+.grid-auto-fill {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-lg);
+}
+
+/* Estilos para Alinhamento Vertical */
+.vertical-center {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Estilos para Imagens de Fundo */
+.bg-cover {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-contain {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Estilos para Blur Effects */
+.backdrop-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Estilos para Glass Morphism */
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Estilos para Texto com Gradiente */
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary-dark), var(--accent-primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Estilos para Animações de Entrada */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.animated {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilos para Cursor Personalizado */
+.custom-cursor {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="%230a2540" opacity="0.3"/><circle cx="16" cy="16" r="8" fill="%232563eb"/></svg>') 16 16, auto;
+}
+
+/* FIM DOS ESTILOS PRINCIPAIS */

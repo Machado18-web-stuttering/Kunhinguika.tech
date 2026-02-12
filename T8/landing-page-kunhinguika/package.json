@@ -1,0 +1,16 @@
+{
+  "name": "landing-page-kunhinguika",
+  "version": "1.0.0",
+  "description": "Landing page moderna para Kunhinguika.tech",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.4.0"
+  },
+  "author": "Kunhinguika.tech",
+  "license": "MIT"
+}
